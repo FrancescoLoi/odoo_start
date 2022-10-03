@@ -42,7 +42,7 @@
                                 <group name="group_general">
                                     <field name="active" invisible="1"/>
                                     <field name="type"/>
-                                    <field name="categ_id" string="Product Category"/>
+                                    <field name="categ_id" invisible="1" string="Product Category"/>
                                 </group>
                                 <group name="group_standard_price">
                                     <label for="list_price"/>
@@ -131,7 +131,7 @@
         <field name="arch" type="xml">
             <search string="Product">
                 <field name="name" string="Product" filter_domain="['|', '|', '|', ('default_code', 'ilike', self), ('product_variant_ids.default_code', 'ilike', self),('name', 'ilike', self), ('barcode', 'ilike', self)]"/>
-                <field name="categ_id" filter_domain="[('categ_id', 'child_of', raw_value)]"/>
+                <field name="categ_id" invisible="1" filter_domain="[('categ_id', 'child_of', raw_value)]"/>
                 <separator/>
                 <filter string="Services" name="services" domain="[('type','=','service')]"/>
                 <filter string="Products" name="consumable" domain="[('type', 'in', ['consu', 'product'])]"/>
@@ -156,7 +156,7 @@
                 <filter string="Archived" name="inactive" domain="[('active','=',False)]"/>
                 <group expand="1" string="Group By">
                     <filter string="Product Type" name="type" context="{'group_by':'type'}"/>
-                    <filter string="Product Category" name="categ_id" context="{'group_by':'categ_id'}"/>
+                    <filter string="Product Category" name="categ_id" invisible="1" context="{'group_by':'categ_id'}"/>
                 </group>
             </search>
         </field>
@@ -305,7 +305,7 @@
                     <field name="company_id" groups="base.group_multi_company" optional="hide" readonly="1"/>
                     <field name="lst_price" optional="show" string="Sales Price"/>
                     <field name="standard_price" optional="show"/>
-                    <field name="categ_id" optional="hide"/>
+                    <field name="categ_id" invisible="1" optional="hide"/>
                     <field name="type" optional="hide" readonly="1"/>
                     <field name="price" invisible="not context.get('pricelist',False)"/>
                     <field name="uom_id" options="{'no_open': True, 'no_create': True}" groups="uom.group_uom" optional="show" readonly="1"/>
